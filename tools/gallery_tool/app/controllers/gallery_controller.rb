@@ -101,6 +101,7 @@ class GalleryController < BasePageController
 
   def edit
     @images = paginate_images
+    @upload_id = (0..29).to_a.map {|x| rand(10)}
   end
 
   def make_cover

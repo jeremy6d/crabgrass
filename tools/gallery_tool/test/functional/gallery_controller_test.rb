@@ -6,6 +6,26 @@ class GalleryControllerTest < ActionController::TestCase
   def setup
   end
 
+  def test_show
+    login_as :blue
+    gallery = Gallery.create!( :user => users(:blue),
+      :title => "Empty Gallery")
+    get :show, :page_id => gallery.id
+    assert_response :success
+    assert_equal [], assigns['images']
+  end
+
+  def test_edit_with_upload_id
+    login_as :blue
+    gallery = Gallery.create!( :user => users(:blue),
+      :title => "Empty Gallery")
+    get :edit, :page_id => gallery.id
+    assert_response :success
+    assert_equal [], assigns['images']
+    assert_not_nil assigns['upload_id'],
+      "edit action should create upload-id"
+  end
+
 # this controller does not really even exist yet:
   def test_create
     login_as :blue
