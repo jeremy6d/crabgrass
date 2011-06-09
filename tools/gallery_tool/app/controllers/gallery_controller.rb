@@ -217,7 +217,7 @@ class GalleryController < BasePageController
   end
 
   def upload
-    @upload_id = (0..29).to_a.map {|x| rand(10)}
+    @upload_id = (0..29).to_a.map {|x| rand(10).to_s}.join
     if request.xhr?
       render :layout => false
     elsif request.post?
